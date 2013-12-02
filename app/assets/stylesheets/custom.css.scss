@@ -1,0 +1,165 @@
+// Place all the styles related to the Locations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap";
+#input-group1 {
+line-height: 1;
+
+  
+}
+#out {
+margin-bottom: 50px;
+padding-top: 60px;
+  
+}
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+  
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #999;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
+
+
+#navbar {
+  background-color: #01c3f6;
+  border-color: #01a9d5;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#2cd2fe), to(#01c3f6));
+  background-image: -webkit-linear-gradient(top, #2cd2fe, 0%, #01c3f6, 100%);
+  background-image: -moz-linear-gradient(top, #2cd2fe 0%, #01c3f6 100%);
+  background-image: linear-gradient(to bottom, #2cd2fe 0%, #01c3f6 100%);
+  background-repeat: repeat-x;
+ }
+
+ #a {
+ color: #ffffff;
+ &:hover {
+ color: #222;
+ }
+ }
+ #b {
+ color: #ffffff;
+ &:hover {
+ color: #222;
+ }
+ }
+ #d {
+ color: #ffffff;
+ &:hover {
+ color: #222;
+ }
+ }
+ #e {
+ color: #ffffff;
+ &:hover {
+ color: #222;
+ }
+ }
+ #c {
+ color: #ffffff;
+ &:hover {
+ color: #222;
+ }
+ }

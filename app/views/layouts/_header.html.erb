@@ -1,0 +1,16 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner" id="navbar">
+    <div class="container" >
+      <%= link_to "Geopedia", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right" >
+          <li><%= link_to "Search",    root_path, id: "a" %></li>
+          <li><%= link_to "Info",    info_path, id: "b" %></li>
+          <li><%= link_to "Map", map_path, id: "c" %></li>
+		  <li><%= link_to "Point of Interest", point_of_interest_path, id: "d" %></li>
+		  <li><%= link_to "Weather", weather_path, id: "e" %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,2 +1,10 @@
-<h1>Locations#info</h1>
-<p>Find me in app/views/locations/info.html.erb</p>
+<% provide(:title, 'Info')%>
+<h1><%="Information on "+ session[:location].city%> </h1>
+
+<div>
+<% session[:location].get_info.each { |info|%>
+<%= link_to (info['title']), "http://en.wikipedia.org/wiki/"+info['title']%><p>
+<%= info['snippet'].html_safe %><p>
+
+<% } %>
+</div>

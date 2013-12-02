@@ -1,8 +1,10 @@
 Geopedia::Application.routes.draw do
-  get "locations/info"
-  get "locations/map"
-  get "locations/point_of_interest"
-  get "locations/weather"
+  root to: 'locations#search'
+  get '/info', to: 'locations#info', as: 'location_search'
+  match '/info', to: 'locations#info',   via: 'get'
+  match '/map', to: 'locations#map',   via: 'get'
+  match '/point_of_interest', to: 'locations#point_of_interest',   via: 'get'
+  match '/weather', to: 'locations#weather',   via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
