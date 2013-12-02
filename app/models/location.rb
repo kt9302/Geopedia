@@ -1,5 +1,6 @@
+require 'rubygems'
 require 'open-uri'
-require 'JSON'
+require 'json'
 class Location < ActiveRecord::Base
     attr_accessor :location, :longitude, :latitude, :city, :state, :country
     def initialize(location='berkeley ca')
