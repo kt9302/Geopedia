@@ -2,22 +2,27 @@
 <% provide(:title, "Search")%>
 <h1>Geopedia</h1>
 
-<div class="input-group" align="center" >
 
-    <%= form_tag(location_search_path,method: "get" ) do %>
-    	<%= text_field_tag('location', params[:location], :size => 150, :placeholder=> "Enter city or zip code") %> 
-		<%= button_tag(type: "submit", class: "btn  btn-success ") do %>
-   		 Search <i class="icon-search"></i>
-		<% end %>
-	<% end %>
+<div class="input-group" align="center" >
+    <div class="form-inline">
+      <%= form_tag(location_search_path,method: "get" ) do %>
+	  
+      <%= text_field_tag('location', params[:location], :size=>30,  :placeholder=> "Enter city or zip code", :autocomplete=>"off", data: {provide: "typeahead", source: "['abc','cde','efg','hij']" } )%> 
+      <%= button_tag(type: "submit", class: "btn  btn-success ") do %>
+       Search 
+             <i class="icon-search"></i>
+      <% end %>
+    <% end %>
+    </div>
 </div>
-	<% [:notice, :error, :alert].each do |level| %>
-  		<% unless flash[level].blank? %>
-    	<div data-alert="alert" class="alert-message <%= flash_class(level) %> fade in" align="center">
-      		<%= content_tag :p, flash[level] %>
-   	 	</div>
- 		 <% end %>
-	<% end %>
+<p>
+    <% [:notice, :error, :alert].each do |level| %>
+        <% unless flash[level].blank? %>
+        <div data-alert="alert" class="alert-message <%= flash_class(level) %> fade in" align="center">
+        <%= content_tag :p, flash[level] %>
+        </div>
+     <% end %>
+<% end %>
 
 	
     
