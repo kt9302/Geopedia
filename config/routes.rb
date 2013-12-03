@@ -1,7 +1,7 @@
 Geopedia::Application.routes.draw do
-  root to: 'locations#search'
+  root to: 'locations#home'
   
-  get '/info', to: 'locations#info', as: 'location_search'
+  get '/info', to: 'locations#search', as: 'location_search'
   match '/info', to: 'locations#info',   via: 'get'
   match '/map', to: 'locations#map',   via: 'get'
   match '/point_of_interest', to: 'locations#point_of_interest',   via: 'get'

@@ -1,2 +1,18 @@
 <% provide(:title, 'Point Interest')%>
-<h1><%="Places around "+ session[:location].city%> </h1>
+<h1><%="Places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
+
+<div>
+<% session[:location].get_place.each do |place|%>
+<% if place.has_key?('rating')  %>
+<%= image_tag(place['icon'], :size => "30x30") %>
+<%= place['name']+"       " +place['vicinity']%>
+<%= 'Type: '+place['types'][0]+"    "+"Rating:"+place['rating'].to_s %><p>
+<% else %>
+
+<%= image_tag(place['icon'], :size => "30x30") %>
+<%= place['name']+"       " +place['vicinity']%>
+<%= 'Type: '+place['types'][0] %><p>
+<% end%>
+
+<% end%>
+</div>

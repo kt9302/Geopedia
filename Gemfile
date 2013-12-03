@@ -6,6 +6,11 @@ gem 'bootstrap-sass', '2.3.2.0'
 
 gem 'twitter-typeahead-rails'
 
+gem 'gmaps4rails'
+
+group :assets do
+ gem 'bootstrap-modal-rails'
+end
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
