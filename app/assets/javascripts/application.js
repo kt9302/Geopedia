@@ -19,6 +19,7 @@
 
 //= require underscore
 //= require gmaps/google
+//= require bootstrap-modal
 //= require_tree .                                                                                                                                                                         
 
 
