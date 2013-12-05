@@ -2,119 +2,120 @@
 $(document).ready(function() {
 $('#location').typeahead({
 	name: 'city',
-  prefetch: {url:"/assets/zips.json"
+  prefetch: {url:"/assets/countries.json"
   			}
-   
-});
+   });
 $('.carousel').carousel({
       
-    })
-});
+    });
+$('input[data-provide="typeahead"][autofocus]').trigger('focus');
+})
 </script>
+
+
+
+
+
+
 <% provide(:title, "Search")%>
 <div class="navbar-wrapper">
   <div class="container">
     <div class="navbar navbar-inverse navbar-static-top" id="navbar">
 	  <div class="container" id="logo1">
-      <%= link_to image_tag("logo.png", :alt => "logo", :width => 170, :height =>50 ), root_path, :class=>"brand" %>
-	  	</div>
+      	<%= link_to image_tag("logo.png", :alt => "logo", :width => 170, :height =>50 ), root_path, :class=>"brand" %>
+	  </div>
      	<nav role="navigation">
         <ul class="nav navbar-nav pull-right">
 		  <li><%= link_to "Home",    root_path, id: "a" %></li>
           <li><%= link_to "Wiki",    info_path, id: "b" %></li>
           <li><%= link_to "Map", map_path, id: "c" %></li>
 		  <li class="dropdown" id: "d">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
-        <ul class="dropdown-menu">
-         <li><%= link_to "Dining",    place_dining_path %></li>
-          <li><%= link_to "Shopping",    place_shopping_path %></li>
-          <li><%= link_to "Hiking", place_hiking_path %></li>
-		  <li><%= link_to "Lodging", place_lodging_path %></li>
-        </ul>
-      </li>
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
+        	<ul class="dropdown-menu">
+         		<li><%= link_to "Dining",    place_dining_path %></li>
+          		<li><%= link_to "Shopping",    place_shopping_path %></li>
+          		<li><%= link_to "Hiking", place_hiking_path %></li>
+		  		<li><%= link_to "Lodging", place_lodging_path %></li>
+        	</ul>
+      	  </li>
 		  <li><%= link_to "Weather", weather_path, id: "e" %></li>
         </ul>
 		</nav>
       </div>
-	  </div>
-	  </div>
+	</div>
+</div>
     
-
-
-
-    <div id="myCarousel" class="carousel slide">
+<div id="myCarousel" class="carousel slide">
 		<!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
-    
   </ol>
-        <div class="carousel-inner">
+  <div class="carousel-inner">
     <div class="item active">
-      <%=image_tag("bg1.jpg") %>
-      <div class="container">
-        <div class="carousel-caption">
-		
-			<div class="input-group" align="center" >
-            <div class="form-inline" id="text" >
-      <%= form_tag(location_search_path,method: "get" ) do %>
-      <%= text_field_tag('location', params[:location], :size => 150, :placeholder=> "Enter city or zip code", :autofocus=>true) %> 
-      <%= submit_tag 'Search', class: 'btn btn-success' ,id: "bu"%>
-    <% end %>
-	 </div>
-     </div>
-	 
-	 <div class="container" style='width:350px; height: 50px; align: center;' id="alert">
-	 <% [:error, :alert].each do |level| %>
-        <% unless flash[level].blank? %>
-        <div data-alert="alert" class="alert alert-warning alert-dismissable" id="message1" >
-                <%= content_tag :p, flash[level] %>
-        </div>
-     <% end %>
-        <% end %>
-		
-		<% unless flash[:notice].blank? %>
-         <div data-alert="alert" class="alert alert-info alert-dismissable" id="message2" >
-		 
-        <%=flash[:notice] %>
-        <% session[:location].places.each do |place| %>
-                
-                
-                <% unless (place.tag=="missing_address"  || place.city==nil || place.state==nil ||place.city==nil) %>
-                <p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
-                <%end %>
-        <%end %>
-         </div> 
-		 <% session[:location]=Location.new('berkeley ca') %>  
-<%end%>
+      <%=image_tag("wall1.jpg", :alt => "item1") %>
+      	<div class="container">
+        	<div class="carousel-caption">
+				<h1 id="caption">Geopedia</h1>
+				<p> </p>
+				<div class="input-group" align="center" >
+            		<div class="form-inline" id="text" >
+      				<%= form_tag(location_search_path,method: "get" ) do %>
+      					<%= text_field_tag('location', params[:location], :size => 150, :placeholder=> "Enter city or zip code") %> 
+     					<%= submit_tag 'Search', class: 'btn btn-success' ,id: "bu"%>
+    				<% end %>
+					 </div>
+     			</div>
+	 			<div class="container" style='width:350px; height: 50px; align: center;' id="alert">
+	 				<% [:error, :alert].each do |level| %>
+        					<% unless flash[level].blank? %>
+							<div data-alert="alert" class="alert alert-warning alert-dismissable" id="message1" >
+                				<%= content_tag :p, flash[level] %>
+        					</div>
+    						 <% end %>
+        			<% end %>
+					<% unless flash[:notice].blank? %>
+         				<div data-alert="alert" class="alert alert-info alert-dismissable" id="message2" >
+		 				<%=flash[:notice] %>
+       					<% session[:location].places.each do |place| %>
+                			<% unless (place.tag=="missing_address"  || place.city==nil || place.state==nil ||place.city==nil) %>
+                			<p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
+                			<%end %>
+        				<%end %>
+         				</div> 
+		 				<% session[:location]=Location.new('berkeley ca') %>  
+					<%end%>
+				</div>		
+			</div>
+			
+			
 		</div>
-	 
-	 
-		
+    </div>
+	
+    <div class="item">
+      <%=image_tag("wall2.jpg", :width=>"1600px",:alt => "item2")%>
+      	<div class="container">
+        	<div class="carousel-caption">
+         	 	<h1>Changes to the Grid</h1>
+          		<p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+          		<p><a class="btn btn-large btn-primary" href="#">Learn more</a></p>
+        	</div>
+      	</div>
+    </div>
+  </div>
+		<!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    	<span class="icon-prev"></span>
+  	</a>
+  	<a class="right carousel-control" href="#myCarousel" data-slide="next">
+    	<span class="icon-next"></span>
+  	</a> 
 </div>
 
-      </div>
-    </div>
-    <div class="item">
-      <%=image_tag("bg2.jpg") %>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Changes to the Grid</h1>
-          <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
-          <p><a class="btn btn-large btn-primary" href="#">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    
-	</div>
-		<!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="icon-next"></span>
-  </a> 
-    </div>
+
+
+
+
 
 
 
