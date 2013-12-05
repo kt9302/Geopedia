@@ -4,7 +4,10 @@ Geopedia::Application.routes.draw do
   get '/info', to: 'locations#search', as: 'location_search'
   match '/info', to: 'locations#info',   via: 'get'
   match '/map', to: 'locations#map',   via: 'get'
-  match '/point_of_interest', to: 'locations#point_of_interest',   via: 'get'
+  match '/place_dining', to: 'locations#place_dining',   via: 'get'
+  match '/place_shopping', to: 'locations#place_shopping',   via: 'get'
+  match '/place_hiking', to: 'locations#place_hiking',   via: 'get'
+  match '/place_lodging', to: 'locations#place_lodging',   via: 'get'
   match '/weather', to: 'locations#weather',   via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

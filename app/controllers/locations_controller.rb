@@ -38,7 +38,14 @@ class LocationsController < ApplicationController
   def map
   end
 
-  def point_of_interest
+  def place_dining
+  end
+  
+  def place_shopping
+  end
+  def place_hiking
+  end
+  def place_lodging
   end
 
   def weather

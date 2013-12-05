@@ -12,14 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= bootstrap.min
 //= require turbolinks
-
-
 //= require twitter/typeahead
-
 //= require underscore
 //= require gmaps/google
-//= require bootstrap-modal
 //= require_tree .                                                                                                                                                                         
 
 

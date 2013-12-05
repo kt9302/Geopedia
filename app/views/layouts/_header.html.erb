@@ -1,16 +1,34 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner" id="navbar">
-    <div class="container" >
-      <%= link_to "Geopedia", root_path, id: "logo" %>
-      <nav>
-        <ul class="nav pull-right" >
-          <li><%= link_to "Home",    root_path, id: "a" %></li>
+< class="navbar navbar-inverse" role="navigation" id="navbar">
+    
+      <div class="container">
+	  <div class="container" id="logo">
+      <%= link_to image_tag("logo.png", :alt => "logo", :width => 170, :height =>50 ), root_path, :class=>"brand" %>
+	  	</div>
+     	<nav role="navigation">
+        <ul class="nav navbar-nav pull-right">
+		  <li><%= link_to "Home",    root_path, id: "a" %></li>
           <li><%= link_to "Wiki",    info_path, id: "b" %></li>
           <li><%= link_to "Map", map_path, id: "c" %></li>
-		  <li><%= link_to "Point of Interest", point_of_interest_path, id: "d" %></li>
+		  <li class="dropdown" id: "d">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
 		  <li><%= link_to "Weather", weather_path, id: "e" %></li>
         </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+		</nav>
+      </div>
+    
+  </header><!-- /.navbar -->
+  
+ 
+
+
+
+
+
+ 

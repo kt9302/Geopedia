@@ -61,11 +61,29 @@ class Location < ActiveRecord::Base
             weather_results=JSON.parse(open(url).read)["forecast"]["txt_forecast"]["forecastday"]
             return weather_results
             end
-        def get_place
+        def get_place_dining
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY'}
+            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"cafe"},
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
             end
+        def get_place_hiking
+            place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"park|campground"}
+            url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
+            place_results=JSON.parse(open(place_url+url).read)["results"]
+        end
+        def get_place_shopping
+            place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"grocery_or_supermarket|florist|store"}
+            url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
+            place_results=JSON.parse(open(place_url+url).read)["results"]
+        end
+        def get_place_lodging
+            place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"lodging"}
+            url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
+            place_results=JSON.parse(open(place_url+url).read)["results"]
+        end
     
 end

@@ -29,8 +29,6 @@ GEM
     atomic (1.1.14)
     bootstrap-modal-rails (2.1.1)
       railties (>= 3.1)
-    bootstrap-sass (2.3.2.0)
-      sass (~> 3.2)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -53,7 +51,7 @@ GEM
     ffi (1.9.3)
     gmaps4rails (2.1.1)
     hike (1.2.3)
-    i18n (0.6.5)
+    i18n (0.6.9)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
     jquery-rails (2.2.1)
@@ -151,7 +149,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-modal-rails
-  bootstrap-sass (= 2.3.2.0)
   capybara (= 2.1.0)
   coffee-rails (= 4.0.1)
   gmaps4rails

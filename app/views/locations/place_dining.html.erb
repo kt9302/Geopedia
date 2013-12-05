@@ -1,4 +1,4 @@
-<% provide(:title, 'Weather')%>
+<% provide(:title, 'Point Interest')%>
 <div class="navbar-wrapper" id="navbar1">
   <div class="container">
     <div class="navbar navbar-inverse navbar-static-top" id="navbar2" >
@@ -28,14 +28,22 @@
     
 
 <div class="container" id="big">
-<h1><%="Weather in "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country %> </h1>
+<h1><%="Dining places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
 
 <div class="container">
-<% session[:location].get_weather.each { |weather|%>
-<%= weather['title'] %><p>
-<%= image_tag(weather['icon_url'], :size => "20x20") %>
-<%= weather['fcttext'] %><p>
+<% session[:location].get_place_dining.each do |place|%>
+<% if place.has_key?('rating')  %>
+<%= image_tag(place['icon'], :size => "30x30") %>
+<%= place['name']+"       " +place['vicinity']%>
+<%= 'Type: '+place['types'][0]+"    "+"Rating:"+place['rating'].to_s %><p>
+<% else %>
 
-<% } %>
+<%= image_tag(place['icon'], :size => "30x30") %>
+<%= place['name']+"       " +place['vicinity']%>
+<%= 'Type: '+place['types'][0] %><p>
+<% end%>
+
+<% end%>
 </div>
+
 </div>
