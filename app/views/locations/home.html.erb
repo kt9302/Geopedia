@@ -75,6 +75,7 @@ $('.carousel').carousel({
 		
 		<% unless flash[:notice].blank? %>
          <div data-alert="alert" class="alert alert-info alert-dismissable" id="message2" >
+		 
         <%=flash[:notice] %>
         <% session[:location].places.each do |place| %>
                 
@@ -83,7 +84,8 @@ $('.carousel').carousel({
                 <p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
                 <%end %>
         <%end %>
-         </div>       
+         </div> 
+		 <% session[:location]=Location.new('berkeley ca') %>  
 <%end%>
 		</div>
 	 

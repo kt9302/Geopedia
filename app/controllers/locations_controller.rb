@@ -14,6 +14,7 @@ class LocationsController < ApplicationController
                 new_location=Location.new(params[:location])
                 if new_location.tag=="none"
                     flash[:error]="Oops! You just entered an unknown place."
+                    session[:location]=Location.new('berkeley ca')
                     redirect_to root_path
                     return
                 elsif new_location.tag=="multiple"
