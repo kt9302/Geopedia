@@ -64,7 +64,7 @@ class Location < ActiveRecord::Base
             end
         def get_place_dining
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"restaurant"}
+            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"cafe|restaurant"}
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
             end

@@ -273,7 +273,7 @@ margin-left:60px;
   
 }
 .dropdown-toggle:active, .dropdown-menu{
-  background: rgba(255, 255, 255, 0.7) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
   
   border: transparent !important;
 }
@@ -351,3 +351,15 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 .routine {
 	color:#999;
 	}
+	
+.image_container{
+text-align:center;
+}
+
+.cont {
+margin-top:60px;
+ p {
+ 	margin-left:190px;
+	}
+}
+

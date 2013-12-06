@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav pull-right">
 		  <li><%= link_to "Home",    root_path, id: "a" %></li>
           <li><%= link_to "Wiki",    info_path, id: "b" %></li>
-          <li><%= link_to "Map", map_path, id: "c" %></li>
+          
 		  <li class="dropdown" id: "d">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
         <ul class="dropdown-menu">
@@ -26,25 +26,76 @@
       </div>
 	  </div>
 	  </div>
-<div class="container" id="big">
-<h1><%="Hking places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
 
-<div>
-<% session[:location].get_place_hiking.each do |place|%>
-<% if place.has_key?('rating')  %>
-<%= image_tag(place['icon'], :size => "30x30") %>
-<%= place['name']+"       " +place['vicinity']%>
-<%= 'Type: '+place['types'][0]+"    "+"Rating:"+place['rating'].to_s %><p>
-<% else %>
 
-<%= image_tag(place['icon'], :size => "30x30") %>
-<%= place['name']+"       " +place['vicinity']%>
-<%= 'Type: '+place['types'][0] %><p>
-<% end%>
 
-<% end%>
+<div class="container" id="big" >
+	<% if session[:location].get_place_hiking.length==0 %>
+			<h1> Sorry, there is no popular nearby hiking places. </h1>
+			<div class="image_container">
+			<%= image_tag("img1.jpg", :alt=>"im1" ) %>
+			</div>
+	<%else %>	
+<h1><%="Hiking places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
+
+	<div class="container">
+		
+		<div class="container" id="big" align="center">
+
+
+<div style='width: 800px;' >
+  <div id="map" style='width: 800px; height: 400px; align: center;' ></div>
 </div>
 </div>
+
+<% hash = Gmaps4rails.build_markers(session[:location].get_place_dining) do |place, marker| %>
+ <% marker.lat place['geometry']['location']['lat'].to_f %>
+ <% marker.lng place['geometry']['location']['lng'].to_f %>
+ <% if place.has_key?('rating') %>
+ 	<% marker.infowindow place['name'].to_s+"   Rating:"+place['rating'].to_s %>
+	<%end %>
+<%end %>
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers(<%=raw hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+  
+});
+
+</script>
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="cont">
+	<% session[:location].get_place_hiking.each do |place|%>
+	<% if place.has_key?('rating')  %>
+	<p><%= image_tag(place['icon'], :size => "30x30") %>
+	<%= place['name']+"       " +place['vicinity']%>
+	<%= 'Type: '+place['types'][0]+"    "+"Rating:"+place['rating'].to_s %></p>
+	<% else %>
+
+	<p><%= image_tag(place['icon'], :size => "30x30") %>
+	<%= place['name']+"       " +place['vicinity']%>
+	<%= 'Type: '+place['types'][0] %></p>
+	<% end%>
+
+	<% end%>
+	<%end %>
+	</div>
+</div>
+
+</div>
+
+
 
 <div class="container">
 <footer class="footer">
@@ -60,9 +111,10 @@
   <nav>
     <ul>
       
+      
+	  
       <li><%= link_to"Contact", "mailto: jasontiank@gmail.com" %></li>
 	  <li><%= link_to"Cal Developer", "http://developer.berkeley.edu/" %></li>
-      
     </ul>
   </nav>
 

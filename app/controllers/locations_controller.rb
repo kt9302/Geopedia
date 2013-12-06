@@ -38,11 +38,7 @@ class LocationsController < ApplicationController
       
   end
 
-  def map
-      if session[:location].city==nil
-          session[:location]=Location.new('berkeley ca')
-        end
-  end
+  
 
   def place_dining
       if session[:location].city==nil

@@ -36,7 +36,7 @@
     
 
 <div class="container" id="big" align="center">
-<h1><%= "Map for" %></h1>
+<h1><%= "Map for "+session[:location].city+", "+session[:location].state+", "+session[:location].country %></h1>
 
 <div style='width: 800px;' >
   <div id="map" style='width: 800px; height: 400px; align: center;' ></div>
@@ -46,7 +46,7 @@
 <% hash = Gmaps4rails.build_markers(session[:location].get_place_dining) do |place, marker| %>
  <% marker.lat place['geometry']['location']['lat'].to_f %>
  <% marker.lng place['geometry']['location']['lng'].to_f %>
- 
+ <% marker.infowindow place['name'].to_s+" "+place['rating'].to_s %>
 <%end %>
 <script>
 handler = Gmaps.build('Google');
@@ -58,6 +58,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 });
 
 </script>
+</div>
 
 
 
