@@ -23,7 +23,8 @@ class Location < ActiveRecord::Base
                 i["types"].each do |j|
                     if j=="locality"
                         @city=i["long_name"]
-                    
+                    elsif j=="administrative_area_level_2" && @city==nil
+                        @city=i["long_name"]
                     elsif j=="administrative_area_level_1"
                         @state=i["long_name"]
                     elsif j=="country"
@@ -63,25 +64,25 @@ class Location < ActiveRecord::Base
             end
         def get_place_dining
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"cafe"},
+            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"restaurant"}
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
             end
         def get_place_hiking
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"park|campground"}
+            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY', :types=>"park|campground"}
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
         end
         def get_place_shopping
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"grocery_or_supermarket|florist|store"}
+            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"grocery_or_supermarket|florist|store|liquor_store"}
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
         end
         def get_place_lodging
             place_url='https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
-            match={:location =>@latitude+","+@longitude, :radius=>1000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"lodging"}
+            match={:location =>@latitude+","+@longitude, :radius=>10000, :sensor=>false, :key=>'AIzaSyCnBGnZOGCUM-mbtHKY20KUW6xmbKr0ewY',:types=>"lodging"}
             url=URI.escape(match.to_a.collect {|each| each.join('=')}.join('&'))
             place_results=JSON.parse(open(place_url+url).read)["results"]
         end

@@ -13,10 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= bootstrap.min
-//= require turbolinks
-//= require twitter/typeahead
+//= require typeahead
 //= require underscore
 //= require gmaps/google
+//= require turbolinks
+
 //= require_tree .                                                                                                                                                                         
 
 

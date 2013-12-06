@@ -35,7 +35,7 @@
 	  </div>
     
 
-<div class="container" id="big">
+<div class="container" id="big" align="center">
 <h1><%= "Map for "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country %></h1>
 
 <div style='width: 800px;' >
@@ -43,30 +43,22 @@
 </div>
 </div>
 <script>
-
+<% hash = Gmaps4rails.build_markers(session[:location].get_place_dining) do |place, marker| %>
+ <% marker.lat place['geometry']['location']['lat'].to_f %>
+ <% marker.lng place['geometry']['location']['lng'].to_f %>
+ <% marker.infowindow place['name'].to_s+" "+place['rating'].to_s %>
+<%end %>
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": <%= session[:location].latitude.to_f %>,
-      "lng": <%= session[:location].longitude.to_f %>,
-      "picture": {
-        "url": "http://maps.google.com/mapfiles/marker.png",
-        "width":  36,
-        "height": 36
-		
-      },
-	  "infowindow": "Welcome!",
-	  
-      
-	  
-    }
-  ]);
+  markers = handler.addMarkers(<%=raw hash.to_json %>);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
+  
 });
 
 </script>
+
+
 
 
 
@@ -86,7 +78,8 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       
       
 	  
-      <li><a href="http://developer.berkeley.edu/">Cal Developer</a></li>
+      <li><%= link_to"Contact", "mailto: jasontiank@gmail.com" %></li>
+	  <li><%= link_to"Cal Developer", "http://developer.berkeley.edu/" %></li>
     </ul>
   </nav>
 

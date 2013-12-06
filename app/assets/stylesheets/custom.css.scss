@@ -11,11 +11,11 @@
 
 html {
   overflow-y: scroll;
-  
+  height:100%;
 }
 
 body {
- 
+ height:100%;
   
   
 }
@@ -58,7 +58,7 @@ font-size: 6em;
 
 h2 {
   font-size: 1.2em;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -292,7 +292,6 @@ margin-left:60px;
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
-
 /* Carousel base class */
 .carousel {
 
@@ -305,32 +304,33 @@ margin-left:60px;
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height:745px;
+  height:100%;
   background-color:#fff;
 }
 
-
-
 .input-group{
 	margin-left:90px;
-	margin-bottom:240px;
+	margin-bottom:270px;
 }
 
 #alert {
 position:relative;
-top:-150px;
-left:-50px;
+top:-270px;
+left:-72px;
 }
 #message1{
-width:250px;
-height:50px;
- background:rgba(255, 241, 30, 0.3) !important;
+width:400px;
+
+ background:rgba(237, 5, 40, 0.4) !important;
+ border-color:#ED0528;
 }
 #message2{
-
- background:rgba(255, 241, 30, 0.3) !important;
+width:400px;
+height:190px;
+ background:rgba(0, 0, 0, 0.5) !important;
+border:transparent;
+overflow:auto;
 }
-
 #big{
 margin-top:50px;
 }
@@ -341,3 +341,7 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
     box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
     outline: 0 none;
 }
+
+.routine {
+	color:#999;
+	}
