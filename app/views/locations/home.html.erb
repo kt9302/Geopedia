@@ -73,18 +73,14 @@ $('input[data-provide="typeahead"][autofocus]').trigger('focus');
                                  <div class="container" style='width:350px; height: 50px; align: center;' id="alert">
                                          <% [:error, :alert].each do |level| %>
                                                 <% unless flash[level].blank? %>
-													<script> $('.carousel').carousel({
-      															interval: false,
-   																 });</script>
+													
                                                         <div data-alert="alert" class="alert alert-warning alert-dismissable" id="message1" >
                                                 <%= content_tag :p, flash[level] %>
                                                 </div>
                                                      <% end %>
                                 <% end %>
                                         <% unless flash[:notice].blank? %>
-										<script> $('.carousel').carousel({
-      															interval: false,
-   																 });</script>
+										
                                          <div data-alert="alert" class="alert alert-info alert-dismissable" id="message2" >
                                                  <%=flash[:notice] %>
                                                <% session[:location].places.each do |place| %>
@@ -92,8 +88,9 @@ $('input[data-provide="typeahead"][autofocus]').trigger('focus');
                                         <p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
                                         <%end %>
                                         <%end %>
+										 
                                          </div> 
-                                                 <% session[:location]=Location.new('berkeley ca') %>  
+                                                  
                                         <%end%>
                                 </div>
 								<small class="routine"> Copyright ©2013 Tian Kang. All rights reserved.</small> 

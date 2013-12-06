@@ -10,14 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= bootstrap.min
-//= require typeahead
-//= require underscore
-//= require gmaps/google
-//= require turbolinks
 
+//= require jquery
+
+//= require jquery_ujs
+//= require underscore-min
+//= require gmaps/google
+//= bootstrap.min
+//= require twitter/typeahead
+//= require turbolinks
 //= require_tree .                                                                                                                                                                         
 
 

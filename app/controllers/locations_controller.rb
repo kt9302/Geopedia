@@ -18,7 +18,9 @@ class LocationsController < ApplicationController
                     redirect_to root_path
                     return
                 elsif new_location.tag=="multiple"
-                    session[:location]=new_location
+                    ps=new_location.places
+                    session[:location]=Location.new('berkeley ca')
+                    session[:location].places=ps
                     flash[:notice]="We have multiple results for you"
                     redirect_to root_path
                     return
@@ -37,18 +39,33 @@ class LocationsController < ApplicationController
   end
 
   def map
+      if session[:location].city==nil
+          session[:location]=Location.new('berkeley ca')
+        end
   end
 
   def place_dining
+      if session[:location].city==nil
+          session[:location]=Location.new('berkeley ca')
+      end
   end
   
   def place_shopping
+      if session[:location].city==nil
+          session[:location]=Location.new('berkeley ca')
+      end
   end
   def place_hiking
+      if session[:location].city==nil
+          session[:location]=Location.new('berkeley ca')
+      end
   end
   def place_lodging
   end
 
   def weather
+      if session[:location].city==nil
+          session[:location]=Location.new('berkeley ca')
+      end
   end
 end
