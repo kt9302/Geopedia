@@ -1,12 +1,18 @@
 <script>
 $(document).ready(function() {
-$('#location').typeahead({
+$('#location').typeahead([{
         name: 'cities',
   prefetch: {url:"/assets/cities.json",
-  		ttl:60000
-                          },
-	limit:13
-   });
+  		ttl:60000},
+	limit:7,
+	
+   },
+   { name: 'cities1',
+  prefetch: {url:"/assets/cities1.json",
+  		ttl:60000},
+	limit:8,
+	
+   }]);
    
 $('.carousel').carousel({
       
@@ -31,7 +37,7 @@ $('input[data-provide="typeahead"][autofocus]').trigger('focus');
         <ul class="nav navbar-nav pull-right">
                   <li><%= link_to "Home",    root_path, id: "a" %></li>
           <li><%= link_to "Wiki",    info_path, id: "b" %></li>
-          <li><%= link_to "Map", map_path, id: "c" %></li>
+          
                   <li class="dropdown" id: "d">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
                 <ul class="dropdown-menu">
