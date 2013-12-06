@@ -42,12 +42,13 @@
   <div id="map" style='width: 800px; height: 400px; align: center;' ></div>
 </div>
 </div>
-<script>
+
 <% hash = Gmaps4rails.build_markers(session[:location].get_place_dining) do |place, marker| %>
  <% marker.lat place['geometry']['location']['lat'].to_f %>
  <% marker.lng place['geometry']['location']['lng'].to_f %>
  <% marker.infowindow place['name'].to_s+" "+place['rating'].to_s %>
 <%end %>
+<script>
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   markers = handler.addMarkers(<%=raw hash.to_json %>);

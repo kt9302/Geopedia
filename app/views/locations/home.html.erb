@@ -3,7 +3,7 @@ $(document).ready(function() {
 $('#location').typeahead({
         name: 'cities',
   prefetch: {url:"/assets/cities.json",
-  		ttl:6000
+  		ttl:60000
                           },
 	limit:13
    });
