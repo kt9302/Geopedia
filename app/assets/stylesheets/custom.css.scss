@@ -308,15 +308,21 @@ margin-left:60px;
   background-color:#fff;
 }
 
+.item {
+    text-align: center;
+    img {
+    margin: 0 auto;}}
+
 .input-group{
-	margin-left:90px;
+	margin-left:auto;
 	margin-bottom:270px;
+	margin-right:auto;
 }
 
 #alert {
 position:relative;
 top:-270px;
-left:-72px;
+left:-47px;
 }
 #message1{
 width:400px;

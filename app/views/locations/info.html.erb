@@ -31,12 +31,12 @@
 <div class="container" id="big">
 <h1><%="Wiki on "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
 
-<div>
-<% session[:location].get_info.each { |info|%>
-<%= link_to (info['title']), "http://en.wikipedia.org/wiki/"+info['title']%><p>
-<%= info['snippet'].html_safe %><p>
+<div class="contents">
+<% session[:location].get_info.each  do |info| %>
+<p><%= link_to (info['title']), "http://en.wikipedia.org/wiki/"+info['title']%></p>
+<p><%= info['snippet'].html_safe %></p>
 
-<% } %>
+<% end %>
 </div>
 </div>
 
