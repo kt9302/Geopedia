@@ -1,11 +1,11 @@
 ## Overview
 **Goal** to achieve in this web app: Integrate information about cities and display it for the user to plan travel. 
 
-Home: Search page and introduction page in carousel. Search results returned by **Google geocode API**
+Home: Search page and introduction page in carousel. Search results returned by **Google geocoding API**
 
 Wiki: Display wikipedia results about the searched place. Results returned by **Media Wiki API**
 
-Places: Contains 4 types: dining, shopping, hiking, and lodging. In each type, we display the relevant places on map and also list them below the map. The results are given by **Google Place API** and displayed by **Google Map API**.
+Places: Contains 4 types: dining, shopping, hiking, and lodging. In each type, we display the relevant places on map and also list them below the map. The results are given by **Google Place API** and displayed by **Google Maps API**.
 
 Weather: Display the 3-day forecast for the searched city. Results returned by **Weather Underground API**.
 
