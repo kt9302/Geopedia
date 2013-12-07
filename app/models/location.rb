@@ -2,7 +2,7 @@ require 'rubygems'
 require 'open-uri'
 require 'json'
 class Location < ActiveRecord::Base
-    attr_accessor :location, :longitude, :latitude, :city, :state, :country,:tag,:places
+    attr_accessor  :longitude, :latitude, :city, :county,:state, :country,:tag,:places
     def initialize(location='berkeley ca', mul=false)
         google_url='http://maps.googleapis.com/maps/api/geocode/json?'
         match={:address =>location, :sensor=>false}
@@ -11,7 +11,7 @@ class Location < ActiveRecord::Base
         geo_results=JSON.parse(open(google_url+url).read)["results"]
         if geo_results.length==1 || (geo_results.length>1 && mul)
             
-            @location=geo_results[0]["formatted_address"]
+            
             @longitude=geo_results[0]["geometry"]["location"]["lng"].to_s
             @latitude=geo_results[0]["geometry"]["location"]["lat"].to_s
             newmatch={:latlng=>@latitude+","+@longitude, :sensor=>false}
@@ -23,8 +23,12 @@ class Location < ActiveRecord::Base
                 i["types"].each do |j|
                     if j=="locality"
                         @city=i["long_name"]
-                    elsif j=="administrative_area_level_2" && @city==nil
-                        @city=i["long_name"]
+                    elsif j=="administrative_area_level_2"
+                        if @city==nil
+                            @city=i["long_name"]
+                        else
+                            @county=i["long_name"]
+                        end
                     elsif j=="administrative_area_level_1"
                         @state=i["long_name"]
                     elsif j=="country"

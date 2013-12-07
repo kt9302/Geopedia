@@ -90,8 +90,12 @@ $('input[data-provide="typeahead"][autofocus]').trigger('focus');
                                          <div data-alert="alert" class="alert alert-info alert-dismissable" id="message2" >
                                                  <%=flash[:notice] %>
                                                <% session[:location].places.each do |place| %>
-                                        <% unless (place.tag=="missing_address"  || place.city==nil || place.state==nil ||place.city==nil) %>
-                                        <p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
+                                        <% unless (place.tag=="missing_address"  || place.city==nil || place.state==nil ||place.country==nil) %>
+											<% if place.county==nil %>
+                                        		<p> <%= link_to (place.city+", "+place.state+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.country %> 
+											<% else %>
+												<p> <%= link_to (place.city+", "+place.state+", "+place.county+", "+place.country),  location_search_path+"?utf8=✓&location="+place.city+", "+place.state+", "+place.county+", "+place.country %>
+											<% end%> 
                                         <%end %>
                                         <%end %>
 										 

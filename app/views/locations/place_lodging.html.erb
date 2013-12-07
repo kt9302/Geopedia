@@ -1,121 +1,104 @@
-<% provide(:title, 'Point Interest')%>
+<% provide(:title, 'Lodging')%>
+
 <div class="navbar-wrapper" id="navbar1">
   <div class="container">
     <div class="navbar navbar-inverse navbar-static-top" id="navbar2" >
 	  <div class="container" id="logo1">
       <%= link_to image_tag("logo.png", :alt => "logo", :width => 170, :height =>50 ), root_path, :class=>"brand" %>
-	  	</div>
+	  </div>
      	<nav role="navigation">
         <ul class="nav navbar-nav pull-right">
 		  <li><%= link_to "Home",    root_path, id: "a" %></li>
           <li><%= link_to "Wiki",    info_path, id: "b" %></li>
           
 		  <li class="dropdown" id: "d">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
-        <ul class="dropdown-menu">
-         <li><%= link_to "Dining",    place_dining_path %></li>
-          <li><%= link_to "Shopping",    place_shopping_path %></li>
-          <li><%= link_to "Hiking", place_hiking_path %></li>
-		  <li><%= link_to "Lodging", place_lodging_path %></li>
-        </ul>
-      </li>
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="f">Places <b class="caret" id="g" ></b></a>
+        	<ul class="dropdown-menu">
+         		<li><%= link_to "Dining",    place_dining_path %></li>
+          		<li><%= link_to "Shopping",    place_shopping_path %></li>
+          		<li><%= link_to "Hiking", place_hiking_path %></li>
+		  		<li><%= link_to "Lodging", place_lodging_path %></li>
+        	</ul>
+      	  </li>
 		  <li><%= link_to "Weather", weather_path, id: "e" %></li>
         </ul>
 		</nav>
       </div>
-	  </div>
-	  </div>
+	</div>
+</div>
     
 
 <div class="container" id="big" >
-	<% if session[:location].get_place_lodging.length==0 %>
+		<% if session[:location].get_place_lodging.length==0 %>
 			<h1> Sorry, there is no popular nearby lodging places. </h1>
 			<div class="image_container">
-			<%= image_tag("img1.jpg", :alt=>"im1" ) %>
+				<%= image_tag("img1.jpg", :alt=>"im1" ) %>
 			</div>
-	<%else %>	
-<h1><%="Lodging places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
-
-	<div class="container">
-		
-		<div class="container" id="big" align="center">
-
-
-<div style='width: 800px;' >
-  <div id="map" style='width: 800px; height: 400px; align: center;' ></div>
+		<%else %>	
+			<h1><%="Lodging places around "+ session[:location].city+", "+ session[:location].state+", " +session[:location].country%> </h1>
+			<div class="container">
+				<div class="container" id="big" align="center">
+					<div style='width: 800px;' >
+  						<div id="map" style='width: 800px; height: 400px; align: center;' >
+						</div>
+					</div>
+				</div>
+			<% i=0%>
+			<% hash = Gmaps4rails.build_markers(session[:location].get_place_lodging) do |place, marker| %>
+  				<% i+=1 %>
+ 				<% marker.lat place['geometry']['location']['lat'].to_f %>
+ 				<% marker.lng place['geometry']['location']['lng'].to_f %>
+ 				<% if place.has_key?('rating') %>
+ 					<% marker.infowindow i.to_s+". "+place['name'].to_s+";      Rating:"+place['rating'].to_s %>
+				<% else %>
+  					<% marker.infowindow i.to_s+". "+place['name'].to_s %>
+				<%end %>
+			<%end %>
+			</div>
+			<div class="cont">
+			<% i=0%>
+			<% session[:location].get_place_lodging.each do |place|%>
+				<% i+=1 %>
+				<% if place.has_key?('rating')  %>
+					<p><%= image_tag(place['icon'], :size => "30x30") %>
+					<%= i.to_s+". "+place['name'] %>
+					<%= "<strong> Address: </strong>".html_safe %>
+					<%= place['vicinity'] %>
+					<%= ('<strong> Type: </strong>'+place['types'][0]+"    "+"<strong> Rating: </strong>"+place['rating'].to_s).html_safe %></p>
+				<% else %>
+					<p><%= image_tag(place['icon'], :size => "30x30") %>
+					<%= i.to_s+". "+place['name'] %>
+					<%= "<strong> Address: </strong>".html_safe %>
+					<%= place['vicinity'] %>
+					<%= ('<strong> Type: </strong>'+place['types'][0]).html_safe %></p>
+				<% end%>
+			<% end%>
+			</div>
+		<%end%>
 </div>
+
+
+
+<div class="container">
+	<footer class="footer">
+	<small>
+		 Developed by Tian Kang 
+	</small>
+ 	<nav>
+    	<ul>
+			<li><%= link_to"Contact", "mailto: jasontiank@gmail.com" %></li>
+	  		<li><%= link_to"Cal Developer", "http://developer.berkeley.edu/" %></li>
+    	</ul>
+  	</nav>
+	</footer>
 </div>
 
-<% hash = Gmaps4rails.build_markers(session[:location].get_place_lodging) do |place, marker| %>
- <% marker.lat place['geometry']['location']['lat'].to_f %>
- <% marker.lng place['geometry']['location']['lng'].to_f %>
- <% if place.has_key?('rating') %>
- 	<% marker.infowindow place['name'].to_s+"   Rating:"+place['rating'].to_s %>
-	<%end %>
-<%end %>
 <script>
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   markers = handler.addMarkers(<%=raw hash.to_json %>);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-  handler.getMap().setZoom(12)
   
 });
-
 </script>
-</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="cont">
-	<% session[:location].get_place_lodging.each do |place|%>
-	<% if place.has_key?('rating')  %>
-	<p><%= image_tag(place['icon'], :size => "30x30") %>
-	<%= place['name']+"       " +place['vicinity']%>
-	<%= 'Type: '+place['types'][0]+"    "+"Rating:"+place['rating'].to_s %></p>
-	<% else %>
-
-	<p><%= image_tag(place['icon'], :size => "30x30") %>
-	<%= place['name']+"       " +place['vicinity']%>
-	<%= 'Type: '+place['types'][0] %></p>
-	<% end%>
-
-	<% end%>
-	<%end %>
-	</div>
-</div>
-
-</div>
-
-
-
-<div class="container">
-<footer class="footer">
-	
-  <small>
-    Developed by Tian Kang 
-	
-	
-	
-  </small>
-  
-  
-  <nav>
-    <ul>
-      
-      
-	  
-      <li><%= link_to"Contact", "mailto: jasontiank@gmail.com" %></li>
-	  <li><%= link_to"Cal Developer", "http://developer.berkeley.edu/" %></li>
-    </ul>
-  </nav>
-
-</footer>
-  </div>
