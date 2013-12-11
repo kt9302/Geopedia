@@ -1,4 +1,10 @@
 Geopedia::Application.routes.draw do
+    namespace :api, defaults: {format: 'json'} do
+        namespace :v1 do
+            match '/search', to: 'locations#search',   via: 'get'
+        end
+    end
+    
   root to: 'locations#home'
   
   get '/info', to: 'locations#search', as: 'location_search'
